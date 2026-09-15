@@ -94,7 +94,7 @@ You are now ready to install your custom JWPUB files to your device. If the file
 ```bash
 folder=$(osascript -e 'POSIX path of (choose folder with prompt "Select folder containing JWPUB files:")')
 
-for f in "$folder"*JWPUB; do
+for f in "$folder"*.jwpub; do
     [ -e "$f" ] || continue
     afcclient --documents org.jw.jwlibrary put "$f" "/Documents/$(basename "$f")"
 done
