@@ -99,7 +99,20 @@ Check that *JW Library* installed properly on your iPhone/iPad; you should now b
 
 ## 5. Install custom JWPUBs
 
-You are now ready to install your custom JWPUB archives to your device. If the files are already on your iPhone/iPad, you can import them manually, one by one, using the normal file-sharing/open-in-JW-Library process.
+You are now ready to install your custom JWPUB files to your device. If the files are already on your iPhone or iPad, you can import them manually, one by one, using the normal file-sharing/open-in-JW-Library process. However, to save time, you can also download these files to your computer and put them inside a folder of your choice. Then, inside Terminal, run the following command, which will allow you to transfer multiple JWPUB files at the same time. Your device should still be connected to your Mac.
+
+```bash
+folder=$(osascript -e 'POSIX path of (choose folder with prompt "Select folder containing JWPUB files:")')
+
+for f in "$folder"*.jwpub; do
+    [ -e "$f" ] || continue
+    afcclient --documents org.jw.jwlibrary put "$f" "/Documents/$(basename "$f")"
+done
+```
+
+> 📌 **PLEASE NOTE:** When prompted, select the folder where you have saved your custom JWPUB files. You may need to restart JW Library for the imported files to appear.
+
+> 💡 **Tip:** This method can also be used to install larger JWPUB files, such as the Bible or the Insight book. First, download the files to your computer from the JW.org website, then use the above command line to import all of them to your device in one go. 
 
 ## ✅ Done
 
